@@ -11,9 +11,9 @@ const LineChart = () => {
   // );
 
   const [points, setPoints] = useState(
-    new Array(12).fill(null).map((i, index) => {
+    new Array(24).fill(null).map((i, index) => {
       return {
-        x: index * (600 / 11) + 100,
+        x: index * (1020 / 23) + 100,
         y: Math.random() * 400 + 100,
         r: 5,
       };
@@ -23,7 +23,7 @@ const LineChart = () => {
   useEffect(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
-      canvas.width = 800;
+      canvas.width = 1220;
       canvas.height = 600;
       const context = canvas.getContext("2d");
       context.font = "15px sans-serif";
@@ -92,25 +92,25 @@ const LineChart = () => {
     context.moveTo(100, 500);
     context.lineTo(100, 100);
     context.moveTo(100, 500);
-    context.lineTo(700, 500);
+    context.lineTo(1120, 500);
     context.stroke();
     context.closePath();
     context.beginPath();
     for (let i = 0; i <= 10; i++) {
       context.moveTo(100, i * 40 + 100);
-      context.lineTo(700, i * 40 + 100);
+      context.lineTo(1120, i * 40 + 100);
       context.fillText((10 - i) * 10, 90, i * 40 + 107);
     }
 
-    for (let i = 0; i < 12; i++) {
-      context.moveTo(i * (600 / 11) + 100, 100);
-      context.lineTo(i * (600 / 11) + 100, 500);
+    for (let i = 0; i < 24; i++) {
+      context.moveTo(i * (1020 / 23) + 100, 100);
+      context.lineTo(i * (1020 / 23) + 100, 500);
       context.fillStyle = "gray";
-      context.fillText(i + 1 + "h", i * (600 / 11) + 115, 520);
+      context.fillText(i + "h", i * (1020 / 23) + 115, 520);
       context.fillStyle = "#2ed573";
       context.fillText(
         ((1 - (points[i].y - 100) / 400) * 100) | 0,
-        i * (600 / 11) + 115,
+        i * (1020 / 23) + 115,
         90
       );
     }
@@ -151,7 +151,7 @@ const LineChart = () => {
 
     pointsCopy.forEach((p) => {
       if (p.r === 8) {
-        p.y = clientY;
+        p.y = clientY >= 500 ? 500 : clientY <= 100 ? 100 : clientY;
       }
     });
 
